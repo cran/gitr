@@ -1,22 +1,31 @@
 #' Git Tag Utilities
-
-
+#'
 #' @name tag
+#'
+#' @examples
+#' \dontrun{
+#'   get_recent_tag()
+#'
+#'   get_tag_info()
+#' }
 NULL
-
 
 #' @describeIn tag
 #'   gets the *most* recent `git` tag.
-#' @return [git_recent_tag()]: Character. The most recent tag.
+#'
+#' @return [git_recent_tag()]: `character(1)`. The most recent tag.
+#'
 #' @export
 git_recent_tag <- function() {
-  tag <- utils::tail(git("tag", "-n")$stdout, 1L)
-  gsub("(^v[0-9]+\\.[0-9]+\\.[0-9]+).*", "\\1", tag)
+  utils::head(git("tag", "--sort=-taggerdate", echo_cmd = FALSE)$stdout, 1L)
 }
 
 #' @describeIn tag
-#'   gets a data frame summary of the current git repository tags.
+#'   gets a data frame summary of
+#'   the current git repository tags.
+#'
 #' @return [git_tag_info()]: A data frame summarizing the repository tags.
+#'
 #' @export
 git_tag_info <- function() {
   is_git()

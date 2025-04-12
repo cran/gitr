@@ -11,10 +11,15 @@ lint_commit_msg(x)
 \item{x}{A single commit message from \code{\link[=get_commit_msgs]{get_commit_msgs()}}.}
 }
 \value{
-Integer. Invisibly returns the number of detected lints
-in the message.
+\code{integer(1)}. Invisibly returns the
+number of detected lints in the message.
 }
 \description{
 Lint a commit message for typical commit style and
 best practices for git.
+}
+\examples{
+\dontrun{
+  lapply(get_commit_msgs(7L), lint_commit_msg)
+}
 }

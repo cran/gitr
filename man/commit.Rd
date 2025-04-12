@@ -11,38 +11,40 @@
 \alias{git_diffcommits}
 \title{Git Commit Utilities}
 \usage{
-get_commit_msgs(sha = NULL, n = 1)
+get_commit_msgs(sha = NULL, n = 1L)
 
 scrape_commits(n)
 
 git_unstage(file = NULL)
 
-git_reset_soft(n = 1)
+git_reset_soft(n = 1L)
 
 git_uncommit()
 
 git_reset_hard()
 
-git_diffcommits(top = 1, n = 2)
+git_diffcommits(top = 1L, n = 2L)
 }
 \arguments{
-\item{sha}{Character. The commit SHA-1 hash to pull messages from.
-If \code{NULL}, the most recent commit on the current branch.}
+\item{sha}{\code{character(n)}. The commit secure hash algorithm (SHA-1).
+If \code{NULL}, typically points to the most recent commit on
+the current branch.}
 
-\item{n}{Numeric. How far back to go from current \code{HEAD}.
+\item{n}{\code{integer(1)}. How far back to go from current \code{HEAD}.
 Same as the command line \verb{git log -n} parameter.
 For \verb{git stash} commands, zero-index into the stash list.}
 
-\item{file}{Character. The path name to a file.}
+\item{file}{\code{character(1)}. The path to a file.}
 
-\item{top}{Numeric. The commit to consider the "top" of the commit stack.
-Defaults to \code{HEAD} or \code{n = 1}.}
+\item{top}{\code{integer(1)}. The commit to consider the
+"top" of the commit stack.
+Defaults to \code{HEAD~0} or \code{top = 1}.}
 }
 \value{
 \code{NULL} ... invisibly.
 
-A list containing commit message entries. The \code{sha} and \code{author}
-of each commit is added as attributes.
+A list containing commit message entries.
+The \code{sha} and \code{author} of each commit is added as attributes.
 }
 \description{
 Git Commit Utilities
@@ -50,6 +52,8 @@ Git Commit Utilities
 \section{Functions}{
 \itemize{
 \item \code{get_commit_msgs()}: gets the commit messages corresponding to the commit \code{sha}.
+\code{sha} can be \code{character(n)}, but must be valid SHAs
+corresponding to commits in the repository.
 
 \item \code{scrape_commits()}: scrapes \code{n} commit messages for useful change log commits
 to be used to create a \code{NEWS.md}.
@@ -60,11 +64,21 @@ Default un-stages \emph{all} files.
 \item \code{git_reset_soft()}: un-commits the most recently committed file(s) and
 add them to the staging area.
 
-\item \code{git_uncommit()}: un-commits the most recently committed file(s) and
-add them to the staging area. Wrapper around \code{\link[=git_reset_soft]{git_reset_soft()}}
+\item \code{git_uncommit()}: un-commits the most recently committed
+file(s) and add them to the staging area.
+Wrapper around \code{\link[=git_reset_soft]{git_reset_soft()}}
 
 \item \code{git_reset_hard()}: \verb{git reset --hard origin/<branch>}.
 
-\item \code{git_diffcommits()}: gets the diff of the corresponding 2 commits. Order matters.
+\item \code{git_diffcommits()}: gets the diff of the corresponding 2 commits.
+Order matters!
 
 }}
+\examples{
+\dontrun{
+  get_commit_msgs()
+
+  get_commit_msgs(n = 3)
+}
+
+}

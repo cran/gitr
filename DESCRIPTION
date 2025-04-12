@@ -1,6 +1,6 @@
 Package: gitr
 Title: A Lightweight API for 'Git'
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: c(
     person(given = "Stu",
            family = "Field",
@@ -10,9 +10,10 @@ Authors@R: c(
     )
 Description: A light-weight, dependency-free, application programming interface
     (API) to access system-level 'Git' commands from within 'R'. Contains wrappers
-    and defaults for common data science workflows as well as
-    'Zsh' plugin aliases. A generalized API syntax is also available.
-    A system installation of 'Git' <https://git-scm.com/downloads> is required.
+    and defaults for common data science workflows as well as 'Zsh'
+    <https://github.com/ohmyzsh/ohmyzsh> plugin aliases. A generalized API syntax
+    is also available. A system installation of 'Git'
+    <https://git-scm.com/downloads> is required.
 License: MIT + file LICENSE
 URL: https://stufield.github.io/gitr/
 BugReports: https://github.com/stufield/gitr/issues
@@ -21,16 +22,17 @@ Suggests: knitr, rmarkdown, spelling, testthat (>= 3.0.0), withr
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyLoad: true
-Copyright: Stu Field 2023
+Copyright: Stu Field 2025
 Config/testthat/edition: 3
-RoxygenNote: 7.2.3
+Config/Needs/website: tidyverse/tidytemplate
+RoxygenNote: 7.3.1
 Language: en-US
 Collate: 'params.R' 'gitr-package.R' 'git.R' 'git-branch.R'
-        'git-commit.R' 'git-lint-commit.R' 'git-pull-request.R'
+        'git-checkout.R' 'git-commit.R' 'git-lint-commit.R' 'git-pr.R'
         'git-sitrep.R' 'git-tag.R' 'trim-sha.R' 'utils.R' 'zsh.R'
 NeedsCompilation: no
-Packaged: 2023-02-14 22:09:53 UTC; sfield
+Packaged: 2025-04-12 21:36:25 UTC; jack
 Author: Stu Field [aut, cre, cph] (<https://orcid.org/0000-0002-1024-5859>)
 Maintainer: Stu Field <stu.g.field@gmail.com>
 Repository: CRAN
-Date/Publication: 2023-02-15 12:50:10 UTC
+Date/Publication: 2025-04-12 21:50:02 UTC

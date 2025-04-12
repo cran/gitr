@@ -4,22 +4,29 @@
 \alias{branch}
 \alias{git_default_br}
 \alias{git_current_br}
+\alias{git_local_br}
 \title{Git Branch Utilities}
 \usage{
 git_default_br()
 
 git_current_br()
+
+git_local_br()
 }
 \value{
-Character. The name of the respective branch if found, otherwise \code{NULL}.
+\code{character(1)}. The name of the respective
+branch if found, otherwise \code{NULL}.
 }
 \description{
 Git Branch Utilities
 }
 \section{Functions}{
 \itemize{
-\item \code{git_default_br()}: gets the default "main" branch, typically either \code{master}, \code{main}, or \code{trunk}.
+\item \code{git_default_br()}: gets the default "main" branch, typically either
+\code{master}, \code{main}, or \code{trunk}.
 
 \item \code{git_current_br()}: gets the \emph{current} branch.
+
+\item \code{git_local_br()}: gets all the \emph{local} branches.
 
 }}

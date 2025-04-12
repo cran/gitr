@@ -1,16 +1,23 @@
 #' Common Lints for Commit Messages
 #'
 #' Lint a commit message for typical commit style and
-#' best practices for git.
+#'   best practices for git.
 #'
 #' @name lint
+#'
 #' @param x A single commit message from [get_commit_msgs()].
-#' @return Integer. Invisibly returns the number of detected lints
-#'   in the message.
+#'
+#' @return `integer(1)`. Invisibly returns the
+#'   number of detected lints in the message.
+#'
+#' @examples
+#' \dontrun{
+#'   lapply(get_commit_msgs(7L), lint_commit_msg)
+#' }
 #' @export
 lint_commit_msg <- function(x) {
   if ( length(x) == 0L ) {
-    return(0)
+    return(0L)
   }
   sha <- attr(x, "sha") %||% "\u2716"
   cnt <- 0L
@@ -46,9 +53,9 @@ lint_commit_msg <- function(x) {
     cnt <- cnt + 1L
   }
   y <- paste(x, collapse = "\n")
-  jira <- grepl("[A-Z]{2,10}-[0-9]{1,4}", y)
-  gh   <- grepl("fixes .*#[0-9]{1,4}|closes .*#[0-9]{1,4}", y, ignore.case = TRUE)
-  if ( !(jira || gh) ) {
+  issue <- grepl("[A-Z]{2,10}-[0-9]{1,4}", y)
+  gh    <- grepl("fixes .*#[0-9]{1,4}|closes .*#[0-9]{1,4}", y, ignore.case = TRUE)
+  if ( !(issue || gh) ) {
     warning("Could not find an issue number in commit message (", sha, ")",
             call. = FALSE)
     cnt <- cnt + 1L
