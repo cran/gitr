@@ -1,6 +1,6 @@
 Package: gitr
 Title: A Lightweight API for 'Git'
-Version: 0.0.2
+Version: 0.1.0
 Authors@R: c(
     person(given = "Stu",
            family = "Field",
@@ -9,11 +9,10 @@ Authors@R: c(
            comment = c(ORCID = "0000-0002-1024-5859"))
     )
 Description: A light-weight, dependency-free, application programming interface
-    (API) to access system-level 'Git' commands from within 'R'. Contains wrappers
-    and defaults for common data science workflows as well as 'Zsh'
-    <https://github.com/ohmyzsh/ohmyzsh> plugin aliases. A generalized API syntax
-    is also available. A system installation of 'Git'
-    <https://git-scm.com/downloads> is required.
+    (API) to access system-level 'Git' <https://git-scm.com/downloads> commands
+    from within 'R'. Contains wrappers and defaults for common data science
+    workflows as well as 'Zsh' <https://github.com/ohmyzsh/ohmyzsh> plugin aliases.
+    A generalized API syntax is also available.
 License: MIT + file LICENSE
 URL: https://stufield.github.io/gitr/
 BugReports: https://github.com/stufield/gitr/issues
@@ -27,12 +26,13 @@ Config/testthat/edition: 3
 Config/Needs/website: tidyverse/tidytemplate
 RoxygenNote: 7.3.1
 Language: en-US
-Collate: 'params.R' 'gitr-package.R' 'git.R' 'git-branch.R'
-        'git-checkout.R' 'git-commit.R' 'git-lint-commit.R' 'git-pr.R'
-        'git-sitrep.R' 'git-tag.R' 'trim-sha.R' 'utils.R' 'zsh.R'
+Collate: 'gitr-params.R' 'gitr-package.R' 'gitr.R' 'gitr-branch.R'
+        'gitr-checkout.R' 'gitr-commit.R' 'gitr-lint-commit.R'
+        'gitr-pr.R' 'gitr-sitrep.R' 'gitr-tag.R' 'gitr-trim-sha.R'
+        'gitr-utils.R' 'zsh.R'
 NeedsCompilation: no
-Packaged: 2025-04-12 21:36:25 UTC; jack
+Packaged: 2025-04-20 18:00:08 UTC; jack
 Author: Stu Field [aut, cre, cph] (<https://orcid.org/0000-0002-1024-5859>)
 Maintainer: Stu Field <stu.g.field@gmail.com>
 Repository: CRAN
-Date/Publication: 2025-04-12 21:50:02 UTC
+Date/Publication: 2025-04-21 07:00:02 UTC

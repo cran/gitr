@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 ![GitHub
-version](https://img.shields.io/badge/Version-0.0.1.9000-success.svg?style=flat&logo=github)
+version](https://img.shields.io/badge/Version-0.0.2.9000-success.svg?style=flat&logo=github)
 [![CRAN
 status](http://www.r-pkg.org/badges/version/gitr)](https://cran.r-project.org/package=gitr)
 [![R-CMD-check](https://github.com/stufield/gitr/workflows/R-CMD-check/badge.svg)](https://github.com/stufield/gitr/actions)
@@ -61,7 +61,7 @@ remotes::install_github("stufield/gitr")
 To install a *specific* tagged release, use:
 
 ``` r
-remotes::install_github("stufield/gitr@v0.0.1")
+remotes::install_github("stufield/gitr@v0.0.2")
 ```
 
 ------------------------------------------------------------------------
@@ -85,19 +85,24 @@ git_version()
 ```
 
 ``` r
-git_current_br()
+gitr_current_br()
 #> [1] "main"
 ```
 
 ``` r
-git_default_br()
+gitr_default_br()
+#> [1] "main"
+```
+
+``` r
+gitr_local_br()
 #> [1] "main"
 ```
 
 #### The Core Engine
 
 ``` r
-(git("branch", "foo"))
+(git("branch foo"))
 #> Running git branch foo
 #> $status
 #> [1] 0
@@ -108,70 +113,67 @@ git_default_br()
 #> $stderr
 #> [1] ""
 
-git("branch", "-av")$stdout |>
+git("branch -av")$stdout |>
   cat(sep = "\n")
 #> Running git branch -av 
-#>   foo                                    f2554e3 Makefile now uses `rcmdcheck` over R CMD check
-#> * main                                   f2554e3 Makefile now uses `rcmdcheck` over R CMD check
+#>   foo                                    87e64a7 Cleaned up and simplified `git()` calls in unit tests
+#> * main                                   87e64a7 Cleaned up and simplified `git()` calls in unit tests
 #>   remotes/origin/HEAD                    -> origin/main
 #>   remotes/origin/bugfix-get-pr-sha       ce27db7 Fix bug in get_pr_sha() (#11)
-#>   remotes/origin/gh-pages                cc64a18 Built site for gitr@0.0.1.9000: f2554e3
-#>   remotes/origin/main                    f2554e3 Makefile now uses `rcmdcheck` over R CMD check
+#>   remotes/origin/gh-pages                bbc7019 Built site for gitr@0.0.2.9000: c804b77
+#>   remotes/origin/main                    87e64a7 Cleaned up and simplified `git()` calls in unit tests
 #>   remotes/origin/prep-for-cran           bb5a9bf Clean up URLs
-#>   remotes/origin/submit-cran             378ef59 Increment version number to 0.0.1
+#>   remotes/origin/submit-cran-0.1.0       1fd2ebd Increment version number
 #>   remotes/origin/update-pkgdown-new-look 0018001 Update GHAs
 
-git("branch", "-D", "foo")$stdout
+git("branch -D foo")$stdout
 #> Running git branch -D foo
-#> [1] "Deleted branch foo (was f2554e3)."
+#> [1] "Deleted branch foo (was 87e64a7)."
 ```
 
 #### Committing
 
 ``` r
-get_commit_msgs(n = 3)
+gitr_commit_msgs(n = 3L)
 #> Running git log --format=%H -n 3
 #> [[1]]
-#> [1] "Makefile now uses `rcmdcheck` over R CMD check"
-#> [2] ""                                              
-#> [3] "- to match the checks in the GHA workflows"    
-#> [4] ""                                              
+#> [1] "Cleaned up and simplified `git()` calls in unit tests"
+#> [2] ""                                                     
 #> attr(,"sha")
-#> [1] "f2554e3"
+#> [1] "87e64a7"
 #> attr(,"author")
 #> [1] "stu.g.field@gmail.com"
 #> 
 #> [[2]]
-#> [1] "Fixed possibly broken URLs" ""                          
+#> [1] "Cleaned up and simplified `git()` calls full package"
+#> [2] ""                                                    
+#> [3] "- internal functions, README, etc."                  
+#> [4] ""                                                    
 #> attr(,"sha")
-#> [1] "7318385"
+#> [1] "06ff16b"
 #> attr(,"author")
 #> [1] "stu.g.field@gmail.com"
 #> 
 #> [[3]]
-#> [1] "Testing during R CMD Check can be difficult"                  
-#> [2] ""                                                             
-#> [3] "- because R CMD check doesn't copy over the .git"             
-#> [4] "  directory during build ... it's technically not a git repo!"
-#> [5] "- so we have to skip many of these tests if they're"          
-#> [6] "  outside of this scope"                                      
-#> [7] "- rely on `devtools::test()` ... aka `make test`"             
-#> [8] "- not ideal, may have to come up with another solution"       
-#> [9] ""                                                             
+#> [1] "Fix plural note in `scrape_commits()` & `gitr_sitrep()`"
+#> [2] ""                                                       
+#> [3] "- \"NEWS-worthy entry/entries\""                        
+#> [4] "- \"commit(s)\""                                        
+#> [5] ""                                                       
 #> attr(,"sha")
-#> [1] "8525393"
+#> [1] "f7c6eab"
 #> attr(,"author")
 #> [1] "stu.g.field@gmail.com"
 ```
 
 ``` r
-glog(5)
+glog(5L)
 #> Running git log --oneline --graph --decorate -n 5 
-#> * f2554e3 (HEAD -> main, origin/main, origin/HEAD) Makefile now uses `rcmdcheck` over R CMD check
-#> * 7318385 Fixed possibly broken URLs
-#> * 8525393 Testing during R CMD Check can be difficult
-#> * 7973b17 Added unit tests for "commit" group
-#> * 78b3c85 Set up special gitr unit testing fixtures
+#> * 87e64a7 (HEAD -> main, origin/main, origin/HEAD) Cleaned up and simplified `git()` calls in unit tests
+#> * 06ff16b Cleaned up and simplified `git()` calls full package
+#> * f7c6eab Fix plural note in `scrape_commits()` & `gitr_sitrep()`
+#> * 8000441 Configure Git User in GHA check-standard.yaml
+#> * 20f9046 Cleaned up commit authorship within worktree test fixture
 ```
 
 ``` r
@@ -194,41 +196,47 @@ git_uncommit()
 git_unstage("DESCRIPTION")
 ```
 
-#### SHA1
+#### Secure Hash Algorithm (SHA-1)
 
 ``` r
 is_sha("d670c93733f3e1d7c95df7f61ebf6ca0476f14e3")
 #> [1] TRUE
 
-is_sha("foo")
-#> [1] FALSE
+is_sha(c("foo", "d670c93"))   # vectorized
+#> [1] FALSE  TRUE
 
-trim_sha("d670c93733f3e1d7c95df7f61ebf6ca0476f14e3")
+gitr_trim_sha("d670c93733f3e1d7c95df7f61ebf6ca0476f14e3")
 #> [1] "d670c93"
 
-trim_sha("foo")
-#> [1] "foo"
+gitr_trim_sha(c("foo", "d670c93"))   # vectorized
+#> [1] "foo"     "d670c93"
+
+gitr_current_sha()
+#> Running git rev-parse HEAD
+#> [1] "87e64a7"
 ```
 
 #### Tags
 
 ``` r
-git_recent_tag()
-#> [1] "v0.0.1"
+gitr_recent_tag()
+#> [1] "v0.0.2"
 ```
 
 ``` r
-git_tag_info()
+gitr_tag_info()
 #>           tag tag_sha target_sha           message    author                   email        user
+#> v0.0.2 v0.0.2 4c4805d    2ffe6bd Release of v0.0.2 Stu Field <stu.g.field@gmail.com> stu.g.field
 #> v0.0.1 v0.0.1 fc7e99a    5e98f89 Release of v0.0.1 Stu Field <stu.g.field@gmail.com> stu.g.field
 #>                               tagdate size                              path
+#> v0.0.2 Sat Apr 12 15:50:09 2025 -0600  148 /Users/runner/work/gitr/gitr/.git
 #> v0.0.1 Wed Feb 15 12:53:58 2023 -0700  148 /Users/runner/work/gitr/gitr/.git
 ```
 
 #### Situation Report
 
 ``` r
-git_sitrep()
+gitr_sitrep()
 #> Using Git version: 2.49.0
 #> 
 #> Current branch: main
@@ -246,22 +254,22 @@ git_sitrep()
 #>   remotes/origin/gh-pages
 #>   remotes/origin/main
 #>   remotes/origin/prep-for-cran
-#>   remotes/origin/submit-cran
+#>   remotes/origin/submit-cran-0.1.0
 #>   remotes/origin/update-pkgdown-new-look
 #> 
 #> Local status:
 #> ✓ OK
 #> 
 #> Upstream remotes: origin
-#> * main f2554e3 [origin/main] Makefile now uses `rcmdcheck` over R CMD check
+#> * main 87e64a7 [origin/main] Cleaned up and simplified `git()` calls in unit tests
 #> 
 #> Commit log: main
 #> Running git log --oneline --graph --decorate -n 5 
-#> * f2554e3 (HEAD -> main, origin/main, origin/HEAD) Makefile now uses `rcmdcheck` over R CMD check
-#> * 7318385 Fixed possibly broken URLs
-#> * 8525393 Testing during R CMD Check can be difficult
-#> * 7973b17 Added unit tests for "commit" group
-#> * 78b3c85 Set up special gitr unit testing fixtures
+#> * 87e64a7 (HEAD -> main, origin/main, origin/HEAD) Cleaned up and simplified `git()` calls in unit tests
+#> * 06ff16b Cleaned up and simplified `git()` calls full package
+#> * f7c6eab Fix plural note in `scrape_commits()` & `gitr_sitrep()`
+#> * 8000441 Configure Git User in GHA check-standard.yaml
+#> * 20f9046 Cleaned up commit authorship within worktree test fixture
 ```
 
 ------------------------------------------------------------------------
